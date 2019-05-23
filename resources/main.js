@@ -21,13 +21,14 @@ function processData() {
     var max = -100;
     var total = 0;
     var count = 0;
+    var temperature = NaN;
 
     // Start at 1 to skip the header row
     for (var i = 1; i < rows.length; i++) {
       var row = rows[i]
       if (row.indexOf(",") == -1) continue;
 
-      var temperature = parseFloat(row.split(",")[1]);
+      temperature = parseFloat(row.split(",")[1]);
 
       if (temperature < min) {
         min = temperature;
@@ -40,6 +41,7 @@ function processData() {
       count++;
     }
 
+    document.getElementById("maxTemp").innerHTML = temperature;
     document.getElementById("maxTemp").innerHTML = max;
     document.getElementById("minTemp").innerHTML = min;
     document.getElementById("averageTemp").innerHTML = total/count;
