@@ -1,7 +1,11 @@
 function redraw() {
   var g = new Dygraph(
     document.getElementById("graph"),
-    "http://127.0.0.1:8082/data"
+    "http://127.0.0.1:8082/data",
+    {
+      ylabel: "Temperature (Celsius)",
+      xlabel: "Time"
+    }
   );
 
   processData();
