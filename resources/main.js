@@ -41,7 +41,7 @@ function processData() {
       count++;
     }
 
-    document.getElementById("maxTemp").innerHTML = temperature;
+    document.getElementById("currentTemp").innerHTML = temperature;
     document.getElementById("maxTemp").innerHTML = max;
     document.getElementById("minTemp").innerHTML = min;
     document.getElementById("averageTemp").innerHTML = total/count;
