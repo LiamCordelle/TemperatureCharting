@@ -1,0 +1,24 @@
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Temperature</title>
+    <script src="resources/dygraph.min.js"></script>
+    <link rel="stylesheet" href="resources/dygraph.css" />
+
+    <script src="resources/main.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="graph"></div>
+
+      <div id="stats">
+        <h3>Max Temperature</h3><p id="maxTemp">Loading...</p>
+        <h3>Min Temperature</h3><p id="minTemp">Loading...</p>
+        <h3>Average Temperature</h3><p id="averageTemp">Loading...</p>
+        <a onclick="redraw()">Reload</a>
+      </div>
+    </div>
+
+  </body>
+</html>
