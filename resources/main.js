@@ -1,7 +1,7 @@
 function redraw() {
   var g = new Dygraph(
     document.getElementById("graph"),
-    "http://127.0.0.1:8082/data",
+    "http://192.168.1.13:8082/data",
     {
       ylabel: "Temperature (Celsius)",
       xlabel: "Time"
@@ -12,7 +12,7 @@ function redraw() {
 }
 
 function processData() {
-  fetch("http://127.0.0.1:8082/data").then(response => {
+  fetch("http://192.168.1.13:8082/data").then(response => {
     return response.text();
   }).then(data => {
     var rows = data.split("\n")
