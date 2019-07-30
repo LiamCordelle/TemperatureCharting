@@ -14,7 +14,7 @@ var app = firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore(app)
 
 function jsonToCsv(json) {
-  var csvOut = "";
+  var csvOut = "Time,Temperature\n";
 
   for (key in json) {
     csvOut += key + "," + parseFloat(json[key]) + "\n";
