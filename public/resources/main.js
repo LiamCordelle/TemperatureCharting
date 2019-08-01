@@ -26,6 +26,7 @@ function jsonToCsv(json) {
 }
 
 function redraw() {
+  setAllLoading();
   var data = db.collection("temperature_data").doc("temperatures").get().then(doc => {
     if (doc.exists) {
       var dataCsv = jsonToCsv(doc.data());
@@ -78,6 +79,13 @@ function processData(data) {
   document.getElementById("maxTemp").innerHTML = max;
   document.getElementById("minTemp").innerHTML = min;
   document.getElementById("averageTemp").innerHTML = total/count;
+}
+
+function setAllLoading() {
+  document.getElementById("currentTemp").innerHTML = "Loading...";
+  document.getElementById("maxTemp").innerHTML = "Loading...";
+  document.getElementById("minTemp").innerHTML = "Loading...";
+  document.getElementById("averageTemp").innerHTML = "Loading...";
 }
 
 window.onload = redraw

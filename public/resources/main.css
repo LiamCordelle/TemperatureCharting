@@ -22,3 +22,11 @@ body {
   height: 40%;
   margin-left: 2.5%;
 }
+
+#reload {
+  color: white;
+  background-color: steelblue;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  text-decoration: none;
+}
