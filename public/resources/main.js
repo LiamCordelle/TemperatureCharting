@@ -1,16 +1,3 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyBAqGw72nlbgNNXw58tfcHv3-GPR84SEII",
-  authDomain: "temperature-charting.firebaseapp.com",
-  databaseURL: "https://temperature-charting.firebaseio.com",
-  projectId: "temperature-charting",
-  storageBucket: "temperature-charting.appspot.com",
-  messagingSenderId: "23889261711",
-  appId: "1:23889261711:web:bce4c34cec323ad6"
-};
-
-// Initialize Firebase
-var app = firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore(app)
 
 function jsonToCsv(json) {
