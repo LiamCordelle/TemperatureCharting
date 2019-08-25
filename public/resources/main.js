@@ -1,4 +1,4 @@
-var db = firebase.firestore(app)
+var db = firebase.firestore()
 
 function jsonToCsv(json) {
   var csvOut = "Time,Temperature\n";
@@ -14,24 +14,33 @@ function jsonToCsv(json) {
 
 function redraw() {
   setAllLoading();
-  var data = db.collection("temperature_data").doc("temperatures").get().then(doc => {
-    if (doc.exists) {
-      var dataCsv = jsonToCsv(doc.data());
-      var g = new Dygraph(
-        document.getElementById("graph"),
-        dataCsv,
-        {
-          ylabel: "Temperature (Celsius)",
-          xlabel: "Time"
-        }
-      );
+  db.collection("temperature_data_v2").get().then(allDocuments => {
+    var resultingCsv = "Time,Temperature\n";
+    allDocuments.forEach(doc => {
+      var line = "";
+      var docData = doc.data();
 
-      processData(dataCsv);
-    } else {
-      console.error("Failed to get document!");
-    }
+      line += docData['timestamp'];
+      line += ",";
+      line += docData['temperature'];
+      line += "\n";
+
+      resultingCsv += line;
+    });
+
+    resultingCsv = resultingCsv.trim();
+
+    var g = new Dygraph(
+      document.getElementById("graph"),
+      resultingCsv,
+      {
+        ylabel: "Temperature (Celsius)",
+        xlabel: "Time"
+      }
+    );
+    processData(resultingCsv);
   }).catch(error => {
-    console.error("Error getting document: ", error);
+    console.error("Error getting temperature data: ", error);
   });
 }
 
@@ -65,7 +74,7 @@ function processData(data) {
   document.getElementById("currentTemp").innerHTML = temperature;
   document.getElementById("maxTemp").innerHTML = max;
   document.getElementById("minTemp").innerHTML = min;
-  document.getElementById("averageTemp").innerHTML = total/count;
+  document.getElementById("averageTemp").innerHTML = total / count;
 }
 
 function setAllLoading() {
