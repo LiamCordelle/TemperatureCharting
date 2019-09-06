@@ -1,31 +1,22 @@
 var db = firebase.firestore()
 
 function jsonToCsv(json) {
-  var csvOut = "Time,Temperature\n";
+  var csvOut = "";
 
   for (key in json) {
-    csvOut += key + "," + parseFloat(json[key]) + "\n";
+    var dataPair = json[key];
+    csvOut += dataPair["timestamp"] + "," + parseFloat(dataPair["temperature"]) + "\n";
   }
-
-  csvOut = csvOut.trim();
 
   return csvOut;
 }
 
 function redraw() {
   setAllLoading();
-  db.collection("temperature_data_v2").get().then(allDocuments => {
+  db.collection("temperature_data_v3").get().then(allDocuments => {
     var resultingCsv = "Time,Temperature\n";
     allDocuments.forEach(doc => {
-      var line = "";
-      var docData = doc.data();
-
-      line += docData['timestamp'];
-      line += ",";
-      line += docData['temperature'];
-      line += "\n";
-
-      resultingCsv += line;
+      resultingCsv += jsonToCsv(doc.data());
     });
 
     resultingCsv = resultingCsv.trim();
